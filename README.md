@@ -4,6 +4,12 @@
 
 ## 安装
 
+```shell
+wget https://github.com/limingxinleo/yh/releases/download/v0.0.1/yh.phar
 
+mv yh.phar /usr/local/bin/yh
+
+yh t:fmt 1615111282
+```
 
 
