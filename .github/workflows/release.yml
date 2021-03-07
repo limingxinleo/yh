@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Build Phar
+        run: |
+          docker build . -t build:latest
+          docker run --name build --entrypoint php build:latest /opt/www/bin/hyperf.php phar:build --name yh.phar -M .env
+          docker cp build:/opt/www/yh.phar .
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -23,3 +28,12 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
+      - name: Upload Phar
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./yh.phar
+          asset_name: yh.phar
+          asset_content_type: application/octet-stream
