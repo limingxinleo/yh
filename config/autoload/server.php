@@ -14,6 +14,7 @@ use Hyperf\Server\Server;
 
 return [
     'mode' => SWOOLE_BASE,
+    // 'type' => Hyperf\Server\CoroutineServer::class,
     'servers' => [
         [
             'name' => 'http',
@@ -28,8 +29,7 @@ return [
     ],
     'settings' => [
         'enable_coroutine' => true,
-        'worker_num' => 4,
-        'pid_file' => BASE_PATH . '/runtime/hyperf.pid',
+        'worker_num' => 1,
         'open_tcp_nodelay' => true,
         'max_coroutine' => 100000,
         'open_http2_protocol' => true,
