@@ -36,7 +36,7 @@
         "hyperf/http-server": "2.1.*",
         "hyperf/logger": "2.1.*",
         "hyperf/model-cache": "2.1.*",
-        "hyperf/phar": "2.1.*",
+        "hyperf/phar": "2.1.x-dev",
         "hyperf/pool": "2.1.*",
         "hyperf/process": "2.1.*",
         "hyperf/redis": "2.1.*",
@@ -85,11 +85,5 @@
         "cs-fix": "php-cs-fixer fix $1",
         "start": "php ./bin/hyperf.php start",
         "test": "co-phpunit -c phpunit.xml --colors=always"
-    },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://mirrors.aliyun.com/composer"
-        }
     }
 }
