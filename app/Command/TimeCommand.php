@@ -38,22 +38,35 @@ class TimeCommand extends HyperfCommand
     {
         parent::configure();
         $this->setDescription('时间戳转化');
-        $this->addArgument('value', InputArgument::REQUIRED, '时间');
+        $this->addArgument('value', InputArgument::OPTIONAL, '时间');
     }
 
     public function handle()
     {
         $value = $this->input->getArgument('value');
+        if (empty($value)) {
+            BEGIN:
+            $value = $this->ask('请输入需要格式化的时间(回车键退出)');
+            if (empty($value)) {
+                return;
+            }
+        }
 
-        $carbon = date_load($value);
-        if (! $carbon) {
+        try {
+            $carbon = date_load($value);
+            if (! $carbon) {
+                throw new \InvalidArgumentException();
+            }
+        } catch (\Throwable $exception) {
             $this->error('输入数据不是有效的时间参数');
-            return;
+            goto BEGIN;
         }
 
         $this->table(['时间戳', '时间'], [[
             $carbon->getTimestamp(),
             $carbon->toDateTimeString(),
         ]]);
+
+        goto BEGIN;
     }
 }
