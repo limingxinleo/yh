@@ -5,7 +5,7 @@
 ## 安装
 
 ```shell
-wget https://github.com/limingxinleo/yh/releases/download/v0.0.2/yh.phar
+wget https://github.com/limingxinleo/yh/releases/download/v0.0.3/yh.phar
 
 chmod u+x yh.phar
 
