@@ -34,8 +34,8 @@ jobs:
           ./configure --enable-openssl --enable-http2 --enable-swoole-curl --enable-swoole-json
           make -j$(nproc)
           sudo make install
-          sudo sh -c "echo extension=swoole > /etc/php/7.4/cli/conf.d/swoole.ini"
-          sudo sh -c "echo swoole.use_shortname='Off' >> /etc/php/7.4/cli/conf.d/swoole.ini"
+          sudo sh -c "echo extension=swoole > /etc/php/8.0/cli/conf.d/swoole.ini"
+          sudo sh -c "echo swoole.use_shortname='Off' >> /etc/php/8.0/cli/conf.d/swoole.ini"
           php --ri swoole
       - name: Build
         run: |
