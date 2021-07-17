@@ -20,6 +20,7 @@ use function Han\Utils\date_load;
 /**
  * @Command
  */
+#[Command]
 class TimeCommand extends HyperfCommand
 {
     /**
