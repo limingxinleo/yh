@@ -11,6 +11,7 @@ declare(strict_types=1);
  */
 namespace App\Command;
 
+use Carbon\Carbon;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Psr\Container\ContainerInterface;
@@ -56,6 +57,10 @@ class TimeCommand extends HyperfCommand
         try {
             $carbon = date_load($value);
             if (! $carbon) {
+                if (method_exists(Carbon::class, $value)) {
+                    $carbon = Carbon::{$value}();
+                }
+
                 throw new \InvalidArgumentException();
             }
         } catch (\Throwable $exception) {
